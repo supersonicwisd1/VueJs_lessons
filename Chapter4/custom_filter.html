@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Stories</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Let's hear some stories!</h1>
+        <div>
+            <ul class="list-group">
+                <li v-for="story in stories | famous'" class="list-group-item">
+                    {{$index+1}}. {{story.writer}} said "{{ story.plot }}"
+                </li>
+            </ul>
+        </div>
+        <!-- displays all data within Vue instance filtered through JSON -->
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.filter('famous', function (stories){
+            return stories.filter(function(item){
+                return item.upvotes > 20;
+            });
+        })
+        new Vue({
+            el: '.container',
+            data: {
+                stories: [
+                {
+                    plot: "I crashed my car today!",
+                    writer: "Alex",
+                    upvotes: 28
+                },
+                {
+                    plot: "Yesterday, someone stole my bag!",
+                    writer: "John",
+                    upvotes: 8
+                },
+                {
+                    plot:  "Someone ate my chocolate...",
+                    writer: "John",
+                    upvotes: 51
+                },
+                {
+                    plot:  "I ate someone's chocolate!",
+                    writer: "Alex",
+                    upvotes: 74
+                }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

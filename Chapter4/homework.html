@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>profile</title>
+</head>
+<body>
+    <div class="container">
+        <h1>People's Profile</h1>
+        <div>
+            <ul class="list-group">
+                <li v-for="data in profiles | orderBy 'age' order" class="list-group-item">
+                    {{data.name}} {{ data.age }}.
+                </li>
+            </ul>
+            <button class="btn-primary" @click="order = order * -1">Reverse Order</button><br /><br />
+            <ul class="list-group">
+                <li v-for="data in profiles | old'" class="list-group-item">
+                    {{$index+1}}. {{data.name}} {{ data.age }}
+                </li>
+            </ul>
+        </div>
+        <!-- displays all data within Vue instance filtered through JSON -->
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.filter('old', function (profiles){
+            return profiles.filter(function(item){
+                return item.age > 55;
+            });
+        })
+        new Vue({
+            el: '.container',
+            data: {
+                order: -1,
+                profiles: [
+                {
+                    name: "Alex",
+                    age: 28
+                },
+                {
+                    name: "Kachi",
+                    age: 88
+                },
+                {
+                    name: "Phillip",
+                    age: 58
+                },
+                {
+                    name: "Alex",
+                    age: 30
+                }
+                ]
+            }
+        })
+    </script>
+</body>
+</html>

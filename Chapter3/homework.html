@@ -1,0 +1,58 @@
+<!-- A nice and super simple introductory exercise is to create an HTML file with a Hello, {{name}}
+heading. Add an input and bind it to name variable. As you can imagine, the heading must change
+instantly whenever the user types or changes his name. Good luck and have fun! -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Greetings Users</title>
+</head>
+<body>
+    <div class="container">
+        <div v-if="(gender== 'male' || gender == 'female') && marital_status== 'single'">
+            <h1>Hello, 
+                <!-- checking if gender is male -->
+                <span v-show="gender=='male' && marital_status== 'single'">Mister {{name}}.</span>
+                 <!-- checking if gender is female -->
+                <span v-show="gender=='female' && marital_status== 'single'">Miss {{name}}.</span>
+            </h1>
+        </div>
+        <div v-else="(gender== 'male' || gender == 'female') && marital_status== 'married'">
+            <h1>Hello, 
+                <!-- checking if gender is male -->
+                <span v-show="gender=='male' && marital_status== 'married'">Mr. {{name}}.</span>
+                 <!-- checking if gender is female -->
+                <span v-show="gender=='female'&& marital_status== 'married'">Mrs. {{name}}.</span>
+            </h1>
+        </div>
+        <!-- <div v-else>
+            
+        </div> -->
+        <form>
+            <div class="form-group">
+                <label for="gender">Enter your gender:</label><br/>
+                <input v-model="gender" type="text" class="form-control col-12" id="gender" placeholder="Gender">
+                <label for="gender">Enter your marital_status:</label><br/>
+                <input v-model="marital_status" type="text" class="form-control col-12" id="marital_status" placeholder="Marital Status">
+                <label for="name">Enter your name:</label><br/>
+                <input v-model="name" type="text" class="form-control col-12" id="name" placeholder="Name">
+            </div>
+        </form>
+    </div>
+    <br/>
+    <!-- displays all data within Vue instance filtered through JSON -->
+    <pre>{{ $data | json }}</pre>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: 'body',
+            data: {
+                marital_status: "",
+                gender: "female",
+                name: "Universe"
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello Vue</title>
+</head>
+<body>
+    <div id="app">
+        <h1>Greeting your Majesty!</h1>
+        <h2>{{ message }}</h2>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js">
+    </script>
+    <script>
+        var data = {
+            message: "Hello Vue!"
+        };
+        new Vue({
+            el: '#app',
+            data: data,
+            // data: {
+            //     message: 'Greetings your Majesty!'
+            // }
+        })
+    </script>
+</body>
+</html>

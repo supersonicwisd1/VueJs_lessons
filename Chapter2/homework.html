@@ -1,0 +1,35 @@
+<!-- A nice and super simple introductory exercise is to create an HTML file with a Hello, {{name}}
+heading. Add an input and bind it to name variable. As you can imagine, the heading must change
+instantly whenever the user types or changes his name. Good luck and have fun! -->
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Greeting Friends</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Hello {{ name }}</h1>
+        <form>
+            <div class="form-group">
+                <label for="name">Enter your name:</label><br/>
+                <input v-model="name" type="text" class="form-control col-12" id="name" placeholder="Name">
+            </div>
+        </form>
+    </div>
+    <br/>
+    <!-- displays all data within Vue instance filtered through JSON -->
+    <!-- <pre>{{ $data | json }}</pre> -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js">
+    </script>
+    <script type="text/javascript">
+        new Vue({
+            el: 'body',
+            data: {
+                name: ""
+            }
+        })
+    </script>
+</body>
+</html>

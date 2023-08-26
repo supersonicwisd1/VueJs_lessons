@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>V-FOR</title>
+</head>
+<body>
+    <div class="container">
+        <h1>The multiplication table of 4</h1>
+        <ul class="list-group">
+            <li v-for="i in 13" class="list-group-item">
+                {{ i }} x 4 = {{ i * 4 }}
+            </li>
+        </ul>
+        <!-- displays all data within Vue instance filtered through JSON -->
+        <pre>{{ $data | json }}</pre>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript">
+        new Vue({
+            el: '.container'
+        })
+    </script>
+</body>
+</html>

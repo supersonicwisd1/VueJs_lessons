@@ -1,3 +1,4 @@
+<!-- Another way to solve the homework -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,12 +11,11 @@
         <div>
             <ul class="list-group">
                 <li v-for="candidate in candidates | orderBy 'votes' order" class="list-group-item">
-                    {{candidate.name}} {{candidate.votes}} <button class="btn btn-default" @click="candidate.votes++">vote</button>
+                    {{candidate.name}} {{candidate.votes}} <button class="btn btn-default" @click="vote(candidate)">vote</button>
                 </li>
             </ul>
         <div>
 
-            <!-- display the name of the 'mayor' using a computed property-->
             <h2>Our mayor is {{mayor.name}}!</h2>
 
             <!-- displays all data within Vue instance filtered through JSON -->
@@ -26,6 +26,11 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
     <script type="text/javascript">
+        Vue.filter('highest', function (candidates){
+            return candidates.filter(function(item){
+                return item.votes > 55;
+            });
+        })
         new Vue({
             el: 'body',
             data: {
@@ -48,6 +53,9 @@
             }
             },
             methods: {
+                vote: function(candidate){
+                    candidate.votes++;
+                },
                 clear: function () {
                     this.candidates = this.candidates.map(function (candidate) {
                         candidate.votes = 0;

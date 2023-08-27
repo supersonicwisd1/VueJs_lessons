@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Famous Stories</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Let's hear some stories!</h1>
+        <div>
+            <ul class="list-group">
+                <li v-for="candidate in candidates | orderBy 'votes' order" class="list-group-item">
+                    {{candidate.name}} {{candidate.votes}} <button class="btn btn-primary" @click="vote">vote</button>
+                </li>
+            </ul>
+            <!-- Reorder the list based on upvotes -->
+            <button @click="order = order * -1">Reverse Order</button>
+        <div>
+            <!-- displays all data within Vue instance filtered through JSON -->
+            <pre>{{ $data | json }}</pre>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.filter('highest', function (candidates){
+            return candidates.filter(function(item){
+                return item.votes > 55;
+            });
+        })
+        new Vue({
+            el: '.container',
+            data: {
+                order: -1,
+                candidates: [
+                {
+                    name: "Alex",
+                    votes: 28
+                },
+                {
+                    name: "John",
+                    votes: 8
+                },
+                {
+                    name: "Wick",
+                    votes: 51
+                },
+                {
+                    name: "Moore",
+                    votes: 74
+                }
+                ]
+            },
+            methods: {
+                vote: function(){
+                    this.votes++;
+                }
+            },
+            
+        })
+    </script>
+</body>
+</html>

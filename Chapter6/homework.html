@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <title>Awesome Stories</title>
+</head>
+<body>
+    <div id="app">
+        <div class="container">
+            <h1>Chariot shopping</h1>
+            <ul class="list-group">
+                <chariot v-for="chariot in chariots" :chariot="chariot" :selected.sync="selected"></chariot>
+            </ul>
+            <pre>{{ $data | json }}</pre>
+        </div>
+            
+        <template id="chariot-template">
+            <li class="list-group-item">
+                <h4>"{{ chariot.name }}" chariot has <strong>{{ chariot.horses }}</strong> horse(s)!</h4>
+                <button @click="selectedChariot(chariot)" class="btn btn-primary" :disabled="isSelectedChariot">{{ status }}</button>
+            </li>
+        </template>
+    </div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
+<script type="text/javascript">
+    Vue.component('chariot',{
+        props: ['chariot', 'selected'],
+        template : '#chariot-template',
+        methods: {
+            selectedChariot: function(chariot) {
+                this.selected = chariot;
+            },
+        },
+        computed: {
+            hasMoreHorses: function () {
+                return this.selected.horses < this.chariot.horses
+            },
+            isSelectedChariot: function () {
+                return this.selected.name == this.chariot.name
+            },
+            noChariot: function () {
+                return this.selected.name == null;
+            },
+            status: function () {
+                if (this.noChariot) {
+                    status = 'Pick Chariot'
+                } else if (this.isSelectedChariot) {
+                    status = 'Riding!'
+                } else if (this.hasMoreHorses) {
+                    status = 'Hire Horses'
+                } else {
+                    status = 'Dismiss Horses'
+                }
+                return status;
+            }
+
+        }
+    })
+    new Vue({
+        el: '#app',
+        data: {
+            chariots: [
+                {
+                    name: 'Olympus',
+                    horses: "4",
+                },
+                {
+                    name: 'Sagitta',
+                    horses: '3',
+                },
+                {
+                    name: 'Icarus',
+                    horses: '2',
+                },
+                {
+                    name: 'Abraxas',
+                    horses: '1',
+                },
+            ],
+            selected: {}
+        }
+    })
+</script>

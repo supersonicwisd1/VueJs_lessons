@@ -9,7 +9,7 @@
         <div class="container">
             <h1>Let's hear a story!</h1>
             <ul class="list-group">
-                <story v-for="story in stories" :story="story"></story>
+                <story v-for="story in stories" :story="story" :favourite.sync="favourite"></story>
             </ul>
             <pre>{{ $data | json }}</pre>
         </div>
@@ -19,6 +19,8 @@
                 {{ story.writer }} said "{{ story.plot }}"
                 Story upvotes {{story.upvotes}}.
                 <button v-show="!story.voted" @click="upvote" class="btn btn-default">Upvote</button>
+                <button v-show="!isFavourite" @click="setFavourite" class="btn btn-primary">Favourite</button>
+                <span v-show="isFavourite" class="glyphicon glyphicon-star pull-right" aria-hidden="true"></span>
             </li>
         </template>
     </div>
@@ -26,13 +28,21 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 <script type="text/javascript">
     Vue.component('story',{
-        props: ['story'],
+        props: ['story', 'favourite'],
         template : '#story-template',
         methods: {
             upvote: function() {
                 this.story.upvotes += 1;
                 this.story.voted = true;
+            },
+            setFavourite: function() {
+                this.favourite = this.story;
             }
+        },
+        computed: {
+            isFavourite: function() {
+                return this.story == this.favourite;
+            },
         }
     })
     new Vue({
@@ -63,7 +73,8 @@
                     upvotes: 16,
                     voted: false,
                 },
-            ]
+            ],
+            favourite: {}
         }
     })
 </script>
